@@ -6,18 +6,26 @@ using UnityEngine.UI;
 
 public class Counter : MonoBehaviour
 {
-    public Text CounterText;
+    public Text counterText;
+    int smallCount;
+    int mediumCount;
+    int largeCount;
 
-    private int Count = 0;
+    private int count = 0;
 
     private void Start()
     {
-        Count = 0;
+       
+        count = 0;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        Count += 1;
-        CounterText.text = "Count : " + Count;
+        smallCount = GameObject.Find("SmallCageCounter").GetComponent<CounterSmall>().count;
+        mediumCount = GameObject.Find("MediumCageCounter").GetComponent<CounterMedium>().count;
+        largeCount = GameObject.Find("LargeCageCounter").GetComponent<CounterLarge>().count;
+
+        count = smallCount + mediumCount + largeCount;
+        counterText.text = $"Total: {count}";
     }
 }
